@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Typing Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden; /* Убираем прокрутку на уровне body */
+        }
+        .typing-container {
+            font-size: 1.5em;
+            border-right: 3px solid #fff;
+            white-space: pre-wrap; /* Перенос текста на новую строку */
+            overflow-y: auto; /* Включаем вертикальную прокрутку */
+            max-width: 90%; /* Ограничиваем ширину */
+            max-height: 80vh; /* Ограничиваем высоту, чтобы добавить прокрутку */
+            animation: blinkCursor 0.75s step-end infinite;
+            line-height: 1.2; /* Немного увеличим высоту строки */
+            padding-right: 5px; /* Добавляем немного отступа справа, чтобы не прилипать к границе */
+        }
+        @keyframes blinkCursor {
+            from { border-right-color: #fff; }
+            to { border-right-color: transparent; }
+        }
+        @media (min-width: 768px) {
+            .typing-container {
+                font-size: 2em;
+            }
+        }
+        @media (min-width: 1200px) {
+            .typing-container {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="typing-container" id="typing-text"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const text = `Сейчас ты видела моменты ради, который я сейчас живу. Может быть, это звучит странно и кажется, что я это говорю для тебя, но нет. Это лето на всю жизнь будет ассоциироваться с тобой, ведь оно только с тобой. И хотелось бы, чтобы и дальше моя жизнь ассоциировалась с тобой. На этих фотографиях нет всех моментов, но в каждом моменте, где есть ты у меня появляется улыбка и пульс. Знакомство с тобой научила меня многому, поменяло многое во мне. От того, как я общаюсь до того, как я мыслю. Никогда в жизни не думал, что смогу найти такого подходящего для меня человека. Ты просто моя любовь, мое сердце. Мне никаким образом не удается передать тебе свои эмоции, так как они очень смешанные. Страх, счастье, привязанность, любовь и многое другое. Если бы передо мной сейчас появилась золотая рыбка и спросила чего же ты хочешь, я бы сказал, что хочу всегда быть рядом с Эвелиной, что хочу чтобы у Эвелины было все хорошо, что хочу, чтобы мы всегда были вместе. Эти желания важнее, чем попросить деньги, чем попросить здоровья себе, просто потому что ты важнее всего. Может тебе и кажется, что я красноречивый, чтобы как-то понравиться тебе, но нет, я это пишу сейчас от сердца. Бывают моменты, когда я думаю, что это все может закончиться и мне становиться очень больно. Никогда не думай о таком, такого никогда не будет. Я с тобой до момента, когда вымрут динозавры, а их нет, так что навсегда. Солнышко мое, ты до сих пор думаешь, что тебе надо как-то худеть, что ты какая-то некрасивая утром. Поверь мне, каждый твой кружочек, в любом состоянии приносит мне столько улыбки, сколько не приносило ничто. Пожалуйста, будь со мной всегда. Пожалуйста, будь со мной откровенной. Пожалуйста, люби меня. Пожалуйста, будь счастлива.`;
+            const typingContainer = document.getElementById("typing-text");
+            let index = 0;
+
+            function typeText() {
+                if (index < text.length) {
+                    typingContainer.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeText, 90); // Уменьшили задержку для более быстрого набора
+                } else {
+                    setTimeout(() => {
+                        typingContainer.innerHTML = '';
+                        index = 0;
+                        typeText();
+                    }, 3000); // Увеличили задержку перед очисткой
+                }
+            }
+
+            typeText();
+        });
+    </script>
+</body>
+</html>
